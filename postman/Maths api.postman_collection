@@ -1,0 +1,121 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Maths api",
+		"_postman_id": "c8b083b7-9842-654c-911a-b3a446f9698d",
+		"description": "All mathematical operations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Addition",
+			"description": "",
+			"item": [
+				{
+					"name": "Post Addition Positive",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"Sum should be 10\"] = jsonData.result[0] === \"10\";",
+									"tests[\"error should be null\"] = jsonData.error === null;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://api.mathjs.org/v4/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"expr\":[\"5+5\"] \n}\n  "
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Post Addition Positive decimal",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"Sum should be correct\"] = jsonData.result[0] === \"12.6\";",
+									"tests[\"error should be null\"] = jsonData.error === null;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://api.mathjs.org/v4/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"expr\":[\"7.6+5\"] \n}\n  "
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Post Addition Negative (5+)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 400\"] = responseCode.code === 400;",
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"Result should be null\"] = jsonData.result === null;",
+									"tests[\"Error should not be null\"] = jsonData.error !== null;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://api.mathjs.org/v4/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"expr\":[\"5+\"] \n}\n  "
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
